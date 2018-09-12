@@ -83,7 +83,7 @@ export default class Youtube extends React.Component{
                     </div>
                     
                     <br/>
-                    {
+                    {/* {
                         this.state.imgsrc.map((obj,i)=>{
                         var image= <div key={i}> <img src={obj}/></div>
                         return image
@@ -109,7 +109,7 @@ export default class Youtube extends React.Component{
                          {this.name} 
                          
                      </div>
-                    </div>
+                    </div> */}
 
 
             </div>
