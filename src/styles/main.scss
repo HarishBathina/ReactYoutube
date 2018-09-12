@@ -1,0 +1,52 @@
+@import "colors";
+
+h2 {
+  color: $secondary;
+  // 
+  text-align: center;
+}
+
+body {
+  background-color: $main;
+  // border: 1px solid black;
+  // color: white;
+  // padding: 5px;
+}
+
+h4 {
+  color: $secondary;
+  // 
+  text-align: center;
+}
+
+.youtube{
+
+  //margin: 140px;
+  //align-content: center;
+  text-align: center;
+
+  border:4px;
+
+  border:dashed;
+  border-collapse: separate;
+
+  padding:4px;
+}
+
+
+li{
+  padding:4px;
+  border:4px blue;
+  text-decoration: none;
+  
+}
+
+div{
+
+  margin:4px;
+}
+
+.inline{
+
+  display: inline-block;
+}
