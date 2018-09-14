@@ -1,6 +1,7 @@
 import React,{component} from "react";
 
 import axios from "axios";
+
 const API='AIzaSyDFRirKWMefYDduWmPoc-OWStD1jpNvM-Y'
 const result=6;
 const searchTerm="angular";
@@ -36,16 +37,18 @@ export default class Youtube extends React.Component{
             //const title=res.data.items.map(obj=>obj.snippet.title)
             //imgsrc=res.data.items.map(obj=>obj.snippet.thumbnails.default.url)
             const resultyt=res.data.items.map(obj=>"https://www.youtube.com/embed/"+obj.id.videoId);
-            this.setState({resultYt:resultyt,search:""});//,imgsrc:imgsrc,title:title});
+            this.setState({resultYt:resultyt});//,imgsrc:imgsrc,title:title});
             //console.log(title);
             //this.setState({});
-        
+            console.log(res.data.items);
+            console.log(resultyt);
+           //setTimeout(this.shouldComponentUpdate(),10000)
         })
 
     
     }
-    componentDidMount(){
-        //this.getVideos();
+    shouldComponentUpdate(){
+        return true;
     }
 
     newSearch(e){
@@ -53,33 +56,59 @@ export default class Youtube extends React.Component{
         this.setState({
             search:e.target.value
         });
+        setTimeout(this.getVideos.bind(this),3000)
         //this.getVideos();
     }
+    delete(i){
+        //console.log(i);
+        //console.log("Hii");
+        const remaining = this.state.resultYt.splice(i,1)
+        const remain =this.state.resultYt
+        this.setState({
+
+            resultYt:remain
+            
+        })
+            
+        }
+    
+    
 
     render(){
         //console.log(this.state.resultYt);
+        //console.log(this.state.resultYt)
         
         return(
+            
             
             <div>
                              
                    
-                   <input type="text" value={this.state.search} onChange={this.newSearch.bind(this)}></input>
+                   <input type="text" className="col-md-3" value={this.state.search} onChange={this.newSearch.bind(this)}></input>
                    <button onClick={this.getVideos.bind(this)}>Get Videos</button>
+
+                   {/* <Result result={this.state.resultYt}/> */}
                    
                    {
 
                         this.state.resultYt.map((link,i)=>{
+                         //const show;
 
-                        var frame= <div className="youtube col-md-12" key={i}> <iframe  width="560" height="315" src={link} frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe> </div>
+                        var frame= <div className="youtube col-md-12" key={i}> <iframe height="315" className="col-md-6" src={link} frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
+                         <button onClick={this.delete.bind(this,i)}>Delete</button></div>
                         return frame
+                            
                             })
                        
                            
                     }
-                    <div className="col-md-12">
+                    
+                    <div className="col-md-12" >
                    
-                    {this.frame}
+                    
+
+                    
+                    
                     </div>
                     
                     <br/>
