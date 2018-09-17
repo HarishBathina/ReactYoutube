@@ -8,7 +8,7 @@
     "build": "webpack --mode production",
     "start": "webpack-dev-server --mode development --open --hot "
   },
-  "author": "AbhishekBharti",
+  "author": "HarishBathina",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.0.0",
@@ -34,6 +34,8 @@
   "dependencies": {
     "axios": "^0.18.0",
     "react": "^16.4.2",
-    "react-dom": "^16.4.2"
+    "react-dom": "^16.4.2",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0"
   }
 }
