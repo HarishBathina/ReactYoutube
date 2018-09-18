@@ -1,4 +1,5 @@
-import axios from "axios";
+
+ export const getSearch = state => state.search
 
 const initialState={
     resultYt:[],
@@ -6,32 +7,32 @@ const initialState={
     
 };
 
-var resultyt;
+//var resultyt;
 
 console.log(initialState);
 
 const reducer=(state=initialState,action)=>{
-    if(action.type==='GET_VIDEOS'){
-        axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=6&q=${state.search}&type=video&key=AIzaSyDFRirKWMefYDduWmPoc-OWStD1jpNvM-Y`)
-        .then(res => 
-         {
-             resultyt =res.data.items.map(obj=>"https://www.youtube.com/embed/"+obj.id.videoId);
-            
-         })
+    if(action.type==='GET_VIDEOS_ASYNC'){
+        
+        
 
-          return{
-                  ...state,
-                  resultYt:resultyt.slice()
-           }
+         return {
+            ...state,
+            resultYt:action.payload.slice()
+            
+     }
+
+          
    
     }
 
-    if(action.type==='NEW_SEARCH'){
-
+    if(action.type==='NEW_SEARCH_ASYNC'){
+        
         return{
             ...state,
-            search:action.value
+            search:action.payload
         }
+        //console.log(state.search,typeof(state.search))
     }
 
      

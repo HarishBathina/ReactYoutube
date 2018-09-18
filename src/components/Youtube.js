@@ -49,6 +49,22 @@ import {connect} from 'react-redux';
 
     
     //}
+
+    // componentWillReceiveProps(nextProps){
+    //     if(this.props.search!==nextProps.search)
+    //     {
+    //         this.props.getVideos();
+    //     }
+
+    // }
+
+    // componentDidMount(){
+    //     if(this.props.resultYt==[])
+    //     {
+    //         this.props.getVideos();
+    //     }
+    //     //this.props.getVideos();
+    // }
     // shouldComponentUpdate(){
     //     return true;
     // }
@@ -77,7 +93,7 @@ import {connect} from 'react-redux';
     
 
     render(){
-        console.log(this.props.resultYt);
+        //console.log(this.props.resultYt);
         //console.log(this.state.resultYt)
         
         return(

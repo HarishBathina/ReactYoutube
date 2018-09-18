@@ -3,10 +3,16 @@ import ReactDom from 'react-dom';
 import App from './components/App';
 
 import {Provider} from 'react-redux';
-import {createStore} from 'redux';
+import {createStore,applyMiddleware} from 'redux';
 import reducer from '../store/reducer';
+import createSagaMiddleware from 'redux-saga';
+import {watchGetVideos} from './sagas/saga';
 
-const store = createStore(reducer);
+const sagaMiddleware = createSagaMiddleware();
+
+const store = createStore(reducer,applyMiddleware(sagaMiddleware));
+
+sagaMiddleware.run(watchGetVideos);
 
 
 
