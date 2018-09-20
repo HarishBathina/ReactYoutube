@@ -8,6 +8,8 @@ const searchTerm="angular";
 import '../styles/main.scss';
 var imgsrc=[];
 import {connect} from 'react-redux';
+import { delay } from "redux-saga";
+var truthy=[];
 
 //document.addEventListener('touchstart', handler, {capture: true});
 
@@ -16,17 +18,19 @@ import {connect} from 'react-redux';
 
  class Youtube extends React.Component{
 
-    // constructor(props){
+    //  constructor(props){
     //     super()
-    //     // this.state={
-    //     //     resultYt: [],
-    //     //     imgsrc:[],
-    //     //     title:[],
-    //     //     search:"Arsenal",
+    //    this.state={
+                  
+    //        
+    // //     //     resultYt: [],
+    // //     //     imgsrc:[],
+    // //     //     title:[],
+    // //     //     search:"Arsenal",
             
 
-    //     // }
-    // }
+    // //      }
+    //  }
 
    
     // getVideos(){
@@ -58,13 +62,7 @@ import {connect} from 'react-redux';
 
     // }
 
-    // componentDidMount(){
-    //     if(this.props.resultYt==[])
-    //     {
-    //         this.props.getVideos();
-    //     }
-    //     //this.props.getVideos();
-    // }
+    
     // shouldComponentUpdate(){
     //     return true;
     // }
@@ -89,6 +87,23 @@ import {connect} from 'react-redux';
     //     })
             
     //     }
+    componentDidMount(){
+        this.props.initialLiked();
+        
+    }
+
+     shouldComponentUpdate(){
+
+    //     console.log('inn');
+    //     this.props.resultYt.map((id,i)=>{
+
+        
+          console.log('ready for update');
+    // });
+    // yield call(delay,2000);
+    return true;
+    
+}
     
     
 
@@ -105,17 +120,23 @@ import {connect} from 'react-redux';
                    <input type="text" className="col-md-3"  onChange={this.props.newSearch.bind(this)}></input>
                    {/* <button onClick={this.getVideos.bind(this)}>Get Videos</button> */}
 
-                   <button onClick={this.props.getVideos.bind(this)}>Get Videos</button>
+                   <button onClick={this.props.getVideos.bind(this,this.props.search)}>Get Videos</button>
+                   <button onClick={this.props.getLikedVideos.bind(this)}>Liked Videos</button>
 
                    {/* <Result result={this.state.resultYt}/> */}
                    
                    {
 
-                        this.props.resultYt.map((link,i)=>{
-                         //const show;
+                        this.props.resultYt.map((id,i)=>{
 
-                        var frame= <div className="youtube col-md-12" key={i}> <iframe height="315" className="col-md-6" src={link} frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
-                         {/* <button onClick={this.delete.bind(this,i)}>Delete</button></div> */}</div>
+                            
+                                     
+                         //const show;
+                           ///console.log("Hiii");
+                        var frame= <div className="youtube col-md-12" key={i}> <iframe height="315" className="col-md-6" src={`https://www.youtube.com/embed/${id}`} frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
+                         <button onClick={this.props.delete.bind(this,i)}>Delete</button>
+                         <button disabled={this.props.liked.indexOf(id)!==-1} onClick={this.props.addDB.bind(this,id)}>Like</button>
+                         </div>
                         return frame
                             
                             })
@@ -172,7 +193,8 @@ const mapStoreToProps = (store) => {
     return {
 
         resultYt: store.resultYt,
-        search: store.search
+        search: store.search,
+        liked:store.liked
 
     }
 };
@@ -181,7 +203,11 @@ const mapDispatchToProps = (dispatch) => {
 
     return{
         newSearch: (e) => dispatch({type: 'NEW_SEARCH',value:e.target.value}),
-        getVideos: () => dispatch({type: 'GET_VIDEOS'})
+        getVideos: (srch) => dispatch({type: 'GET_VIDEOS',value:srch}),
+        delete: (i) => dispatch({type:'DELETE_VIDEO',value:i}),
+        getLikedVideos: () => dispatch({type:'GET_LIKED_VIDEOS'}),
+        addDB: (id) => dispatch({type:'ADD2DB',value:id}),
+        initialLiked: () => dispatch({type:'GET_LIKED_DB'})
     }
 }
 

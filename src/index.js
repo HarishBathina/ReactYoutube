@@ -4,7 +4,7 @@ import App from './components/App';
 
 import {Provider} from 'react-redux';
 import {createStore,applyMiddleware} from 'redux';
-import reducer from '../store/reducer';
+import reducer from './store/reducer';
 import createSagaMiddleware from 'redux-saga';
 import {watchGetVideos} from './sagas/saga';
 

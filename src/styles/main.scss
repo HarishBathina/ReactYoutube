@@ -50,3 +50,17 @@ div{
 
   display: inline-block;
 }
+
+button{
+  margin: 1px;
+  display: inline-block;
+  font-weight: bold;
+  //background-color: green;
+}
+
+button:disabled{
+
+ // background-color: black;
+  color:red;
+  font-style: italic;
+}
