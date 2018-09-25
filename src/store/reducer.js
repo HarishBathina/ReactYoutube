@@ -13,7 +13,7 @@ const initialState={
 
 var resultyt;
 
-console.log(initialState);
+//console.log(initialState);
 
 const reducer=(state=initialState,action)=>{
     if(action.type==='GET_VIDEOS_ASYNC'){
@@ -53,7 +53,7 @@ const reducer=(state=initialState,action)=>{
 
     if(action.type==='LIKED_VIDEOS'){
 
-        console.log(state.liked);
+        //console.log(state.liked);
 
         return{
             ...state,

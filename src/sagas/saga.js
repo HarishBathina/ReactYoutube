@@ -31,7 +31,7 @@ function* getVidAsync(val){
 }
 
 function* delVidAsync(i){
-    console.log(i.value);
+    //console.log(i.value);
     yield put({type:'DEL_VID_ASYNC',payload:i.value});
 }
 

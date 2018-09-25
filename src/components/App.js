@@ -5,13 +5,42 @@ import Header from './Header';
 import User from './User';
 import Youtube from './Youtube';
 import { BrowserRouter as Router,Route,Link } from 'react-router-dom';
+import firebase from 'firebase';
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 
-export default class App extends Component{
+firebase.initializeApp({
+    apiKey:"AIzaSyCFM3cGx0xKSlCJ31M6vYLJ7LrJlKAu4uQ",
+    authDomain:"react-firebase-b05cd.firebaseapp.com"
+
+})
+
+
+class App extends Component{
     constructor(){
         super(),
         this.state={
-            name:"Ozil"
+            name:"Ozil",
+            isSignedIn:false
         };
+    }
+
+    uiConfig ={
+        signInFlow: 'popup',
+        signInOptions: [
+            firebase.auth.GoogleAuthProvider.PROVIDER_ID
+        ],
+        callbacks:{
+            signInSuccess: () => false
+        }
+    }
+    
+    componentDidMount(){
+        
+         
+        firebase.auth().onAuthStateChanged(user =>{
+            this.setState({isSignedIn:!!user});
+            console.log(user)
+        })
     }
 
     onChangeName(newName){
@@ -22,18 +51,13 @@ export default class App extends Component{
 
     render() {
         return(
-        // <div>
-        //     <h2>My React App</h2>
-        //     <div>
-        //         <Header name={this.state.name} initialAge={29} changeName={this.onChangeName.bind(this)}
-        //         >
-              
-        //           <User />
-        //         </Header>
-                <Router>
+             <div>
+             {this.state.isSignedIn ? (<Router>
                   <div>
+                  <span><h4>Welcome {firebase.auth().currentUser.displayName}</h4></span>
                   <nav className="navbar navbar-expand-sm bg-dark">
-                    
+
+                  
                   <ul className="navbar-nav">
                         <li className="nav-item">
                                 <Link className="nav-link" to="/">Home</Link>
@@ -48,8 +72,15 @@ export default class App extends Component{
                         <li className="nav-item">
                                 <Link className="nav-link" to="/youtubeApi">Youtube</Link>
                         </li>
+                        <li className="nav-item">
+                        <button className="nav-link" onClick={()=>firebase.auth().signOut()}>Sign Out</button> 
+                        </li>
                        </ul>
+                       
+                      
                     </nav>   
+                       
+                       
                         
                         <Route exact path={'/header'} render={(props) => <Header {...props} name={this.state.name} initialAge={29} changeName={this.onChangeName.bind(this)} >
                         
@@ -61,18 +92,23 @@ export default class App extends Component{
                         <Route path={'/youtubeApi'} component={Youtube}></Route>
                         
                         
-                        
+                         
                    </div>
+                   
                 </Router>
-                //<Youtube />
+                ):(<StyledFirebaseAuth 
+                uiConfig={this.uiConfig}
+                firebaseAuth={firebase.auth()} />)}
+                
+               
 
                  
                 
-        //     </div>
+            </div>
         // </div>
         );
             
     }
 }
 
-// export default App;
+export default App;
