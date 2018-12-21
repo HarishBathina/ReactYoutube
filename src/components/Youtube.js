@@ -1,40 +1,40 @@
-import React,{component} from "react";
+import React, { component } from "react";
 
 import axios from "axios";
 
-const API='AIzaSyDFRirKWMefYDduWmPoc-OWStD1jpNvM-Y'
-const result=6;
-const searchTerm="angular";
+const API = 'AIzaSyDFRirKWMefYDduWmPoc-OWStD1jpNvM-Y'
+const result = 6;
+const searchTerm = "angular";
 import '../styles/main.scss';
-var imgsrc=[];
-import {connect} from 'react-redux';
+var imgsrc = [];
+import { connect } from 'react-redux';
 import { delay } from "redux-saga";
-var truthy=[];
+var truthy = [];
 
 //document.addEventListener('touchstart', handler, {capture: true});
 
 
 //https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=6&q=react&type=video&key=AIzaSyDFRirKWMefYDduWmPoc-OWStD1jpNvM-Y
 
- class Youtube extends React.Component{
+class Youtube extends React.Component {
 
     //  constructor(props){
     //     super()
     //    this.state={
-                  
+
     //        
     // //     //     resultYt: [],
     // //     //     imgsrc:[],
     // //     //     title:[],
     // //     //     search:"Arsenal",
-            
+
 
     // //      }
     //  }
 
-   
+
     // getVideos(){
-        
+
 
     //     axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=6&q=${this.state.search}&type=video&key=AIzaSyDFRirKWMefYDduWmPoc-OWStD1jpNvM-Y`)
     //     .then(res => 
@@ -51,7 +51,7 @@ var truthy=[];
     //        //setTimeout(this.shouldComponentUpdate(),10000)
     //     })
 
-    
+
     //}
 
     // componentWillReceiveProps(nextProps){
@@ -62,7 +62,7 @@ var truthy=[];
 
     // }
 
-    
+
     // shouldComponentUpdate(){
     //     return true;
     // }
@@ -83,77 +83,78 @@ var truthy=[];
     //     this.setState({
 
     //         resultYt:remain
-            
+
     //     })
-            
+
     //     }
-    componentDidMount(){
+    componentDidMount() {
+
         this.props.initialLiked();
-        
+
     }
 
-     shouldComponentUpdate(){
+    shouldComponentUpdate() {
 
-    //     console.log('inn');
-    //     this.props.resultYt.map((id,i)=>{
+        //     console.log('inn');
+        //     this.props.resultYt.map((id,i)=>{
 
-        
-          console.log('ready for update');
-    // });
-    // yield call(delay,2000);
-    return true;
-    
-}
-    
-    
 
-    render(){
+        console.log('ready for update');
+        // });
+        // yield call(delay,2000);
+        return true;
+
+    }
+
+
+
+    render() {
         //console.log(this.props.resultYt);
         //console.log(this.state.resultYt)
-        
-        return(
-            
-            
+
+        return (
+
+
             <div>
-                             
-                   
-                   <input type="text" className="col-md-3"  onChange={this.props.newSearch.bind(this)}></input>
-                   {/* <button onClick={this.getVideos.bind(this)}>Get Videos</button> */}
 
-                   <button onClick={this.props.getVideos.bind(this,this.props.search)}>Get Videos</button>
-                   <button onClick={this.props.getLikedVideos.bind(this)}>Liked Videos</button>
 
-                   {/* <Result result={this.state.resultYt}/> */}
-                   
-                   {
+                <input type="text" className="col-md-3" onChange={this.props.newSearch.bind(this)}></input>
+                {/* <button onClick={this.getVideos.bind(this)}>Get Videos</button> */}
 
-                        this.props.resultYt.map((id,i)=>{
+                <button onClick={this.props.getVideos.bind(this, this.props.search)}>Get Videos</button>
+                <button onClick={this.props.getLikedVideos.bind(this)}>Liked Videos</button>
 
-                            
-                                     
-                         //const show;
-                           ///console.log("Hiii");
-                        var frame= <div className="youtube col-md-12" key={i}> <iframe height="315" className="col-md-6" src={`https://www.youtube.com/embed/${id}`} frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
-                         <button onClick={this.props.delete.bind(this,i)}>Delete</button>
-                         <button disabled={this.props.liked.indexOf(id)!==-1} onClick={this.props.addDB.bind(this,id)}>Like</button>
-                         </div>
+                {/* <Result result={this.state.resultYt}/> */}
+
+                {
+
+                    this.props.resultYt.map((id, i) => {
+
+
+
+                        //const show;
+                        ///console.log("Hiii");
+                        var frame = <div className="youtube col-md-12" key={i}> <iframe height="315" className="col-md-6" src={`https://www.youtube.com/embed/${id}`} frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
+                            <button onClick={this.props.delete.bind(this, i)}>Delete</button>
+                            <button disabled={this.props.liked.indexOf(id) !== -1} onClick={this.props.addDB.bind(this, id)}>Like</button>
+                        </div>
                         return frame
-                            
-                            })
-                       
-                           
-                    }
-                    
-                    <div className="col-md-12" >
-                   
-                    
 
-                    
-                    
-                    </div>
-                    
-                    <br/>
-                    {/* {
+                    })
+
+
+                }
+
+                <div className="col-md-12" >
+
+
+
+
+
+                </div>
+
+                <br />
+                {/* {
                         this.state.imgsrc.map((obj,i)=>{
                         var image= <div key={i}> <img src={obj}/></div>
                         return image
@@ -183,7 +184,7 @@ var truthy=[];
 
 
             </div>
-            
+
         );
     }
 }
@@ -194,22 +195,22 @@ const mapStoreToProps = (store) => {
 
         resultYt: store.resultYt,
         search: store.search,
-        liked:store.liked
+        liked: store.liked
 
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
 
-    return{
-        newSearch: (e) => dispatch({type: 'NEW_SEARCH',value:e.target.value}),
-        getVideos: (srch) => dispatch({type: 'GET_VIDEOS',value:srch}),
-        delete: (i) => dispatch({type:'DELETE_VIDEO',value:i}),
-        getLikedVideos: () => dispatch({type:'GET_LIKED_VIDEOS'}),
-        addDB: (id) => dispatch({type:'ADD2DB',value:id}),
-        initialLiked: () => dispatch({type:'GET_LIKED_DB'})
+    return {
+        newSearch: (e) => dispatch({ type: 'NEW_SEARCH', value: e.target.value }),
+        getVideos: (srch) => dispatch({ type: 'GET_VIDEOS', value: srch }),
+        delete: (i) => dispatch({ type: 'DELETE_VIDEO', value: i }),
+        getLikedVideos: () => dispatch({ type: 'GET_LIKED_VIDEOS' }),
+        addDB: (id) => dispatch({ type: 'ADD2DB', value: id }),
+        initialLiked: () => dispatch({ type: 'GET_LIKED_DB' })
     }
 }
 
 
-export default connect(mapStoreToProps,mapDispatchToProps) (Youtube);
+export default connect(mapStoreToProps, mapDispatchToProps)(Youtube);

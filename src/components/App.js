@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import '../styles/main.scss';
 import Header from './Header';
 import User from './User';
+import New from './New';
 import Youtube from './Youtube';
 import { BrowserRouter as Router,Route,Link } from 'react-router-dom';
 import firebase from 'firebase';
@@ -73,8 +74,12 @@ class App extends Component{
                                 <Link className="nav-link" to="/youtubeApi">Youtube</Link>
                         </li>
                         <li className="nav-item">
+                                <Link className="nav-link" to="/new">New</Link>
+                        </li>
+                        <li className="nav-item">
                         <button className="nav-link" onClick={()=>firebase.auth().signOut()}>Sign Out</button> 
                         </li>
+                        
                        </ul>
                        
                       
@@ -90,6 +95,7 @@ class App extends Component{
                         </Route>
                         <Route path={'/user'} component={User}></Route>
                         <Route path={'/youtubeApi'} component={Youtube}></Route>
+                        <Route path={'/new'} component={New}></Route>
                         
                         
                          
